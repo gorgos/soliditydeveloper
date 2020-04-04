@@ -1,0 +1,15 @@
+---
+language: node_js
+node_js: 10
+sudo: false
+cache:
+  directories:
+    - "node_modules"
+env:
+  global:
+    - SCRIVITO_TENANT: "1234567890abcdef1234567890abcdef"
+  matrix:
+    - TASK: "build"
+    - TASK: "eslint"
+    - TASK: "es-check"
+script: npm run $TASK

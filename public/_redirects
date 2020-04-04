@@ -1,0 +1,12 @@
+##
+# Netlify redirect rules. See https://www.netlify.com/docs/redirects/ for details.
+##
+
+# Scrivito routes
+/scrivito/:slug/* /scrivito/index.html 200
+/scrivito /scrivito/index.html 200
+
+# Single Page Application routes
+/* status-code=404-not-found /catch_all_index.html 404
+# PRERENDERED-UPPERCASE-ROUTES-PLACEHOLDER
+/* /catch_all_index.html 200

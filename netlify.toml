@@ -1,0 +1,7 @@
+# Global settings applied to the whole site.
+# “command” is your build command.
+# “publish” is the directory to publish (relative to root of your repo).
+
+[build]
+  command = "npm run build"
+  publish = "build"
