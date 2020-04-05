@@ -21,7 +21,11 @@ class CodeWidgetComponent extends React.Component {
         content={this.props.widget}
         attribute="text"
       >
-        <code className="language-solidity">
+        <code
+          className={`language-${
+            this.props.widget.get("language") || "solidity"
+          }`}
+        >
           {this.props.widget.get("text")}
         </code>
       </pre>

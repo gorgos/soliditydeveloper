@@ -14,12 +14,21 @@ Scrivito.provideEditingConfig("CodeWidget", {
         { value: "right", title: "Right" },
       ],
     },
+    language: {
+      title: "Language",
+      description: "Default: Solidity",
+      values: [
+        { value: "solidity", title: "Solidity" },
+        { value: "javascript", title: "JavaScript" },
+        { value: "html", title: "HTML" },
+      ],
+    },
     text: {
       title: "Text",
       description: "The actual source code of this text",
     },
   },
-  properties: ["alignment", "text"],
+  properties: ["alignment", "language", "text"],
   initialContent: {
     alignment: "left",
   },
