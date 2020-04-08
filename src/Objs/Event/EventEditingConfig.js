@@ -20,6 +20,9 @@ Scrivito.provideEditingConfig("Event", {
     image: {
       title: "Image",
     },
+    link: {
+      title: "Link",
+    },
     locationName: {
       title: "Location name",
       description: "E.g. New York Convention Center",
@@ -56,6 +59,7 @@ Scrivito.provideEditingConfig("Event", {
   properties: [
     "title",
     "date",
+    "link",
     "locationName",
     "locationStreetAddress",
     "locationLocality",

@@ -6,6 +6,7 @@ const Event = Scrivito.provideObjClass("Event", {
     body: ["widgetlist", { only: "SectionWidget" }],
     date: "date",
     image: ["reference", { only: ["Image"] }],
+    link: "link",
     locationName: "string",
     locationStreetAddress: "string",
     locationLocality: "string",

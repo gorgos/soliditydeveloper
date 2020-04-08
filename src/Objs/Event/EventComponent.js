@@ -32,6 +32,17 @@ Scrivito.provideComponent("Event", ({ page }) => (
               >
                 <EventDate date={page.get("date")} />
               </Scrivito.ContentTag>
+              {page.get("link") && (
+                <h2 className="h5 font-weight-bold">
+                  <Scrivito.LinkTag
+                    to={page.get("link")}
+                    style={{ color: "white" }}
+                  >
+                    <i className="fa fa-angle-right fa-4" aria-hidden="true" />
+                    {page.get("link").title()}
+                  </Scrivito.LinkTag>
+                </h2>
+              )}
               <EventLocation event={page} />
             </h2>
           </div>
