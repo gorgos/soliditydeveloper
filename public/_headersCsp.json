@@ -1,7 +1,7 @@
 {
   "base-uri": "'none'",
   "default-src": ["'self'", "data:", "https:", "wss:"],
-  "style-src": ["'self'", "data:", "https:", "wss:", "'unsafe-inline'"],
+  "style-src": ["'self'", "data:", "https:", "wss:", "'unsafe-inline'", "https://fonts.googleapis.com", "https://tagmanager.google.com/"],
   "script-src": [
     "'self'",
     "https://api.scrivito.com",
@@ -9,7 +9,9 @@
     "https://assets.scrivito.com",
     "https://js.intercomcdn.com",
     "https://widget.intercom.io",
-    "https://www.google-analytics.com"
+    "https://www.google-analytics.com",
+    "https://tagmanager.google.com/",
+    "https://www.googletagmanager.com/"
   ],
   "object-src": "'none'",
   "block-all-mixed-content": true
