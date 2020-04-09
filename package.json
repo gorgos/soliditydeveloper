@@ -25,6 +25,7 @@
     "core-js": "^3.6.4",
     "css-loader": "^3.4.2",
     "dateformat": "^3.0.3",
+    "disqus-react": "^1.0.8",
     "dotenv": "^8.2.0",
     "es-check": "^5.1.0",
     "escape-html": "^1.0.3",

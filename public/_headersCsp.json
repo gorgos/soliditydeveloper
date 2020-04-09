@@ -9,7 +9,7 @@
     "'unsafe-inline'",
     "https://fonts.googleapis.com",
     "https://tagmanager.google.com/",
-    "http://downloads.mailchimp.com/"
+    "http://*.mailchimp.com/"
   ],
   "script-src": [
     "'self'",
@@ -24,8 +24,11 @@
     "http://tagmanager.google.com/",
     "https://tagmanager.google.com/",
     "https://www.googletagmanager.com/",
-    "http://downloads.mailchimp.com/",
-    "http://*.list-manage.com/"
+    "http://*.mailchimp.com/",
+    "http://*.list-manage.com/",
+    "https://disqus.com",
+    "https://*.disqus.com",
+    "https://*.disquscdn.com"
   ],
   "object-src": "'none'",
   "block-all-mixed-content": true
