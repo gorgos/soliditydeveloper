@@ -3,5 +3,5 @@
 # “publish” is the directory to publish (relative to root of your repo).
 
 [build]
-  command = "npm run build"
-  publish = "build"
+  command = "npm run prerender"
+  publish = "buildPrerendered"
