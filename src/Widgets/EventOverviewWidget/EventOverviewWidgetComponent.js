@@ -91,6 +91,15 @@ const EventItem = Scrivito.connect(({ event }) => (
         <span className="box-date">
           {formatDate(event.get("date"), "mm/dd")}
         </span>
+        {formatDate(event.get("endDate"), "mm/dd") !==
+          formatDate(event.get("date"), "mm/dd") && (
+          <>
+            <span className="box-date-hyphen">-</span>
+            <span className="box-date-end">
+              {formatDate(event.get("endDate"), "mm/dd")}
+            </span>
+          </>
+        )}
         <span className="box-topic dark-background">
           <h3 className="h3">{event.get("title")}</h3>
           <EventShortLocation event={event} />

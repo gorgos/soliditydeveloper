@@ -9,9 +9,12 @@ function dataFromEvent(event) {
     name: event.get("title"),
     url: Scrivito.urlFor(event),
     startDate: formatDate(event.get("date"), "yyyy-mm-dd"),
+    endDate: formatDate(event.get("endDate"), "yyyy-mm-dd"),
     location: locationFromEvent(event),
     image: urlFromBinary(event.get("image")),
     description: event.get("metaDataDescription"),
+    eventAttendanceMode: event.get("eventAttendanceMode"),
+    eventStatus: event.get("eventStatus"),
   };
 }
 
