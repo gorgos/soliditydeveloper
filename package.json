@@ -45,7 +45,6 @@
     "filesize": "^6.1.0",
     "fs-extra": "^9.0.0",
     "fuse.js": "^3.6.1",
-    "generator-scrivito": "file:generator-scrivito",
     "html-webpack-plugin": "^4.2.0",
     "is-empty": "^1.2.0",
     "jquery": "^3.5.0",
