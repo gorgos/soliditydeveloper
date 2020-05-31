@@ -8,9 +8,10 @@ import TagList from "../../Components/TagList";
 class EventOverviewWidgetComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { currentTag: "" };
+    this.state = { currentTag: "", showPastEvents: false };
 
     this.setTag = this.setTag.bind(this);
+    this.togglePastEvents = this.togglePastEvents.bind(this);
   }
 
   render() {
@@ -25,6 +26,12 @@ class EventOverviewWidgetComponent extends React.Component {
       eventsSearch = eventsSearch.and("tags", "equals", this.state.currentTag);
     }
 
+    if (this.state.showPastEvents) {
+      eventsSearch = eventsSearch.and("endDate", "isLessThan", new Date());
+    } else {
+      eventsSearch = eventsSearch.and("endDate", "isGreaterThan", new Date());
+    }
+
     const tags = [...Event.all().facet("tags")].map((facet) => facet.name());
 
     const maxItems = this.props.widget.get("maxItems");
@@ -35,13 +42,13 @@ class EventOverviewWidgetComponent extends React.Component {
       events = [...eventsSearch];
     }
 
-    if (!events.length) {
+    /* if (!events.length) {
       return (
         <InPlaceEditingPlaceholder center>
           There are no event pages. Create one using the page menu.
         </InPlaceEditingPlaceholder>
       );
-    }
+    } */
 
     return (
       <div>
@@ -54,6 +61,16 @@ class EventOverviewWidgetComponent extends React.Component {
           tags={tags}
         />
         <section className="bg-white">
+          <input
+            checked={this.state.showPastEvents}
+            onChange={this.togglePastEvents}
+            type="checkbox"
+            id="showPastEvents"
+            name="showPastEvents"
+          />
+          <label className="past-event-label" htmlFor="showPastEvents">
+            Show Past Events
+          </label>
           <div className="row">
             {events.map((event, index) => (
               <EventItem key={`${event.id}${index}`} event={event} />
@@ -62,6 +79,12 @@ class EventOverviewWidgetComponent extends React.Component {
         </section>
       </div>
     );
+  }
+
+  togglePastEvents() {
+    this.setState((prevState) => ({
+      showPastEvents: !prevState.showPastEvents,
+    }));
   }
 
   setTag(tag) {
