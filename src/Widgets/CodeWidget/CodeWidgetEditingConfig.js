@@ -21,6 +21,7 @@ Scrivito.provideEditingConfig("CodeWidget", {
         { value: "solidity", title: "Solidity" },
         { value: "javascript", title: "JavaScript" },
         { value: "html", title: "HTML" },
+        { value: "yml", title: "YAML" },
       ],
     },
     text: {
