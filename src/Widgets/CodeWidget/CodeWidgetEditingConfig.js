@@ -5,15 +5,6 @@ Scrivito.provideEditingConfig("CodeWidget", {
   title: "Code",
   thumbnail: textWidgetIcon,
   attributes: {
-    alignment: {
-      title: "Alignment",
-      description: "Default: Left",
-      values: [
-        { value: "left", title: "Left" },
-        { value: "center", title: "Center" },
-        { value: "right", title: "Right" },
-      ],
-    },
     language: {
       title: "Language",
       description: "Default: Solidity",
@@ -22,6 +13,7 @@ Scrivito.provideEditingConfig("CodeWidget", {
         { value: "javascript", title: "JavaScript" },
         { value: "html", title: "HTML" },
         { value: "yml", title: "YAML" },
+        { value: "bash", title: "Bash" },
       ],
     },
     text: {
@@ -29,8 +21,8 @@ Scrivito.provideEditingConfig("CodeWidget", {
       description: "The actual source code of this text",
     },
   },
-  properties: ["alignment", "language", "text"],
+  properties: ["language", "text"],
   initialContent: {
-    alignment: "left",
+    language: "solidity",
   },
 });
