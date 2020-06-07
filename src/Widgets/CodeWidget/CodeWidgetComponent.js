@@ -4,20 +4,20 @@ import * as Scrivito from "scrivito";
 import Prism from "prismjs";
 
 class CodeWidgetComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.codeRef = React.createRef();
+  }
+
   componentDidMount() {
-    Prism.highlightAll();
+    Prism.highlightAllUnder(this.codeRef.current);
   }
 
   render() {
-    const classNames = [];
-    if (this.props.widget.get("alignment")) {
-      classNames.push(`text-${this.props.widget.get("alignment")}`);
-    }
-
     return (
       <pre
         tag="div"
-        className={classNames.join(" ")}
+        ref={this.codeRef}
         content={this.props.widget}
         attribute="text"
       >
