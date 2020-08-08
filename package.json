@@ -57,7 +57,7 @@
     "moment-from-now": "0.0.4",
     "node-sass": "^4.13.1",
     "prettier": "^2.0.4",
-    "prismjs": "^1.20.0",
+    "prismjs": "^1.21.0",
     "puppeteer": "^2.1.1",
     "react": "^16.13.1",
     "react-cookie-consent": "^3.0.0",
