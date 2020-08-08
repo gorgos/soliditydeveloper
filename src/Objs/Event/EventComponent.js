@@ -31,6 +31,15 @@ Scrivito.provideComponent("Event", ({ page }) => (
                 className="event-info"
               >
                 <EventDate date={page.get("date")} />
+                {formatDate(page.get("endDate"), "mm/dd/yyyy") !==
+                  formatDate(page.get("date"), "mm/dd/yyyy") && (
+                  <>
+                    <span className="box-date-hyphen">-</span>
+                    <span className="box-date-end">
+                      {formatDate(page.get("endDate"), "mm/dd/yyyy")}
+                    </span>
+                  </>
+                )}
               </Scrivito.ContentTag>
               {page.get("link") && (
                 <div className="h5 font-weight-bold">
@@ -56,11 +65,7 @@ Scrivito.provideComponent("Event", ({ page }) => (
 
 function EventDate({ date }) {
   if (!date) {
-    return (
-      <InPlaceEditingPlaceholder>
-        Click to select a date
-      </InPlaceEditingPlaceholder>
-    );
+    return "TBA";
   }
 
   return formatDate(date, "mm/dd/yyyy");
