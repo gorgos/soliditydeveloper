@@ -36,12 +36,17 @@ Scrivito.provideComponent("BlogPost", ({ page }) => {
         </div>
       </section>
       <Scrivito.ContentTag tag="div" content={page} attribute="body" />
-      <div className="container">
-        <Disqus.DiscussionEmbed
-          shortname={disqusShortname}
-          config={disqusConfig}
-        />
-      </div>
+
+      {!Scrivito.isInPlaceEditingActive() && (
+        <div className="container">
+          <Disqus.DiscussionEmbed
+            shortname={disqusShortname}
+            config={disqusConfig}
+          />
+          g
+        </div>
+      )}
+
       <BlogPostAuthor author={page.get("author")} />
       <BlogPostTagList tags={page.get("tags")} />
       <BlogPostMorePosts
