@@ -12,7 +12,7 @@ Scrivito.provideComponent("BlogOverviewWidget", ({ widget }) => {
 
   return (
     <BlogPostPreviewList
-      maxItems={widget.get("maxItems")}
+      maxItems={widget.get("maxItems") || 14}
       author={widget.get("author")}
       tag={tag}
     />

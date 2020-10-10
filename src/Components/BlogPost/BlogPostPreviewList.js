@@ -2,33 +2,50 @@ import * as React from "react";
 import * as Scrivito from "scrivito";
 import { groupBy, truncate } from "lodash-es";
 import BlogPostDate from "./BlogPostDate";
+import ShowMoreButton from "../../Objs/SearchResults/ShowMoreButton";
 import formatDate from "../../utils/formatDate";
 import InPlaceEditingPlaceholder from "../InPlaceEditingPlaceholder";
 import isImage from "../../utils/isImage";
 
-const BlogPostPreviewList = Scrivito.connect(
-  ({ maxItems, author, tag, filterBlogPostId }) => {
+class BlogPostPreviewList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { maxItems: this.props.maxItems };
+
+    this.incrementMaxItems = this.incrementMaxItems.bind(this);
+    this.calculateResults = this.calculateResults.bind(this);
+  }
+
+  calculateResults() {
     let blogPosts = Scrivito.getClass("BlogPost")
       .all()
       .order("publishedAt", "desc");
-    if (author) {
-      blogPosts = blogPosts.and("author", "refersTo", author);
+    if (this.props.author) {
+      blogPosts = blogPosts.and("author", "refersTo", this.props.author);
     }
-    if (tag) {
-      blogPosts = blogPosts.and("tags", "equals", tag);
+    if (this.props.tag) {
+      blogPosts = blogPosts.and("tags", "equals", this.props.tag);
     }
-    if (filterBlogPostId) {
-      blogPosts = blogPosts.andNot("id", "equals", filterBlogPostId);
-    }
-
-    let posts;
-    if (maxItems) {
-      posts = blogPosts.take(maxItems);
-    } else {
-      posts = [...blogPosts];
+    if (this.props.filterBlogPostId) {
+      blogPosts = blogPosts.andNot("id", "equals", this.props.filterBlogPostId);
     }
 
-    if (!posts.length) {
+    // if (maxItems) {
+    //   posts = blogPosts.take(maxItems);
+    // } else {
+    //   posts = [...blogPosts];
+    // }
+
+    return {
+      posts: blogPosts.take(this.state.maxItems),
+      totalCount: blogPosts.count(),
+    };
+  }
+
+  render() {
+    const { posts, totalCount } = this.calculateResults();
+
+    if (!totalCount) {
       return (
         <InPlaceEditingPlaceholder center>
           There are no blog posts. Create one using the page menu.
@@ -49,10 +66,19 @@ const BlogPostPreviewList = Scrivito.connect(
             <PostsTimeline posts={monthPosts} />
           </React.Fragment>
         ))}
+        <ShowMoreButton
+          totalCount={totalCount}
+          currentMaxItems={this.state.maxItems}
+          onClick={this.incrementMaxItems}
+        />
       </React.Fragment>
     );
   }
-);
+
+  incrementMaxItems() {
+    this.setState({ maxItems: this.state.maxItems + this.props.maxItems });
+  }
+}
 
 const MonthHeadline = Scrivito.connect(({ date }) => {
   if (!date) {
@@ -122,4 +148,4 @@ const BlogPostTitleImage = Scrivito.connect(({ post }) => {
   );
 });
 
-export default BlogPostPreviewList;
+export default Scrivito.connect(BlogPostPreviewList);
