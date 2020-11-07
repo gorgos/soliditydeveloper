@@ -12,6 +12,6 @@ Scrivito.provideEditingConfig("SpaceWidget", {
   },
   properties: ["size"],
   initialContent: {
-    size: 5,
+    size: 1,
   },
 });
