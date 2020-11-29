@@ -43,7 +43,6 @@ Scrivito.provideComponent("BlogPost", ({ page }) => {
             shortname={disqusShortname}
             config={disqusConfig}
           />
-          g
         </div>
       )}
 
