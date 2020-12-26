@@ -14,6 +14,7 @@ Scrivito.provideEditingConfig("CodeWidget", {
         { value: "html", title: "HTML" },
         { value: "yml", title: "YAML" },
         { value: "bash", title: "Bash" },
+        { value: "json", title: "JSON" },
       ],
     },
     text: {

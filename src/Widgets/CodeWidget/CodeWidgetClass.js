@@ -5,7 +5,7 @@ const CodeWidget = Scrivito.provideWidgetClass("CodeWidget", {
     text: "html",
     language: [
       "enum",
-      { values: ["solidity", "javascript", "html", "yml", "bash"] },
+      { values: ["solidity", "javascript", "html", "yml", "bash", "json"] },
     ],
   },
   extractTextAttributes: ["text"],
