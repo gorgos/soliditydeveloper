@@ -82,7 +82,7 @@ class EventOverviewWidgetComponent extends React.Component {
           </label>
           <div className="row">
             {events.map((event, index) => (
-              <EventItem key={`${event.id}${index}`} event={event} />
+              <EventItem key={`${event.id()}${index}`} event={event} />
             ))}
           </div>
         </section>
