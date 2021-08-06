@@ -20,6 +20,7 @@ const Homepage = Scrivito.provideObjClass("Homepage", {
     ...metadataAttributes,
   },
   extractTextAttributes: ["navigationSection", "body"],
+  onlyAsRoot: true,
 });
 
 export default Homepage;
