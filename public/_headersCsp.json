@@ -31,5 +31,6 @@
     "https://*.disquscdn.com"
   ],
   "object-src": "'none'",
-  "block-all-mixed-content": true
+  "block-all-mixed-content": true,
+  "frame-ancestors": ["'self'", "https://*.scrivito.com"]
 }
