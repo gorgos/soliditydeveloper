@@ -2,6 +2,7 @@ import * as Scrivito from "scrivito";
 
 const config = {
   adoptUi: true,
+  optimizedWidgetLoading: true,
   strictSearchOperators: true,
   tenant: process.env.SCRIVITO_TENANT,
 };
