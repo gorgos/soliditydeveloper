@@ -56,7 +56,7 @@
     "mini-css-extract-plugin": "^0.9.0",
     "moment-from-now": "0.0.4",
     "prettier": "^2.2.1",
-    "prismjs": "^1.24.1",
+    "prismjs": "^1.25.0",
     "puppeteer": "^2.1.1",
     "react": "^16.14.0",
     "react-cookie-consent": "^3.0.0",
@@ -78,7 +78,7 @@
     "typescript": "^3.9.7",
     "webpack": "^4.44.2",
     "webpack-cli": "^4.8.0",
-    "webpack-dev-server": "^4.0.0",
+    "webpack-dev-server": "^4.1.0",
     "webpack-manifest-plugin": "^2.2.0",
     "webpackbar": "^4.0.0",
     "zip-webpack-plugin": "^3.0.0"
