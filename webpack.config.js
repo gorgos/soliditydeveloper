@@ -126,7 +126,6 @@ function webpackConfig(env = {}) {
     },
     devServer: {
       port: 8080,
-      stats: "minimal",
       historyApiFallback: {
         rewrites: [
           { from: /^\/scrivito$/, to: "/scrivito/index.html" },
@@ -137,6 +136,9 @@ function webpackConfig(env = {}) {
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Content-Security-Policy": devServerCspHeader(),
+      },
+      devMiddleware: {
+        stats: "minimal",
       },
     },
   };
