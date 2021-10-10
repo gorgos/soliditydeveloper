@@ -7,7 +7,7 @@ Scrivito.provideEditingConfig("ImageWidget", {
   attributes: {
     alignment: {
       title: "Alignment",
-      description: "Default: Left",
+      description: "Default: Center",
       values: [
         { value: "left", title: "Left" },
         { value: "center", title: "Center" },
@@ -40,7 +40,7 @@ Scrivito.provideEditingConfig("ImageWidget", {
   },
   properties: ["animation", "alignment", "alternativeText", "link"],
   initialContent: {
-    alignment: "left",
+    alignment: "center",
     animation: "none",
   },
   validations: [
