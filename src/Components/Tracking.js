@@ -1,24 +1,17 @@
 import * as React from "react";
 import * as Scrivito from "scrivito";
 import { Helmet } from "react-helmet-async";
-import { useCookieConsent } from "./CookieConsentContext";
 
 export default function Tracking() {
-  const [trackingEnabled, setTrackingEnabled] = React.useState(false);
-  const { cookieConsentChoice } = useCookieConsent();
-
+  const [_, setTrackingEnabled] = React.useState(false);
   React.useEffect(() => {
-    if (cookieConsentChoice === "accepted") {
-      configureGoogleAnalytics().then(() => setTrackingEnabled(true));
-    }
-  }, [cookieConsentChoice]);
+    configureGoogleAnalytics().then(() => setTrackingEnabled(true));
+  }, []);
 
   return (
-    trackingEnabled && (
-      <Helmet>
-        <script async src="/tracking.js" />
-      </Helmet>
-    )
+    <Helmet>
+      <script async src="/tracking.js" />
+    </Helmet>
   );
 }
 

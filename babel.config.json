@@ -1,0 +1,13 @@
+{
+  "plugins": [
+    [
+      "prismjs",
+      {
+        "languages": ["javascript", "solidity", "html", "yaml", "bash", "json"],
+        "plugins": ["line-numbers"],
+        "theme": "default",
+        "css": true
+      }
+    ]
+  ]
+}

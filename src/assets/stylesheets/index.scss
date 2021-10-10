@@ -891,6 +891,35 @@ _:-ms-fullscreen,
   font-family: "PT Sans Narrow", sans-serif;
   font-weight: 600;
 }
+.past-event-label {
+  margin-left: 5px;
+}
+.box-card .box-date-end {
+  position: absolute;
+  top: 25px;
+  left: 100px;
+  display: block;
+  width: 60px;
+  height: 60px;
+  background: $secondary;
+  color: #fff;
+  border-radius: 50%;
+  line-height: 60px;
+  text-align: center;
+  font-family: "PT Sans Narrow", sans-serif;
+  font-weight: 600;
+}
+.box-card .box-date-hyphen {
+  color: white;
+  position: absolute;
+  top: 41px;
+  left: 87px;
+  display: block;
+  width: 60px;
+  height: 60px;
+  font-family: "PT Sans Narrow", sans-serif;
+  font-size: 35px;
+}
 .box-card .box-image {
   display: block;
   position: absolute;
