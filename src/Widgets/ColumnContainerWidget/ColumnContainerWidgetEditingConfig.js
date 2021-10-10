@@ -13,9 +13,8 @@ Scrivito.provideEditingConfig("ColumnContainerWidget", {
   ],
   initialContent: {
     columns: [
-      new ColumnWidget({ colSize: 4 }),
-      new ColumnWidget({ colSize: 4 }),
-      new ColumnWidget({ colSize: 4 }),
+      new ColumnWidget({ colSize: 6 }),
+      new ColumnWidget({ colSize: 6 }),
     ],
     alignment: "start",
   },
