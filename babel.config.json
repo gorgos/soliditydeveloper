@@ -3,7 +3,15 @@
     [
       "prismjs",
       {
-        "languages": ["javascript", "solidity", "html", "yaml", "bash", "json"],
+        "languages": [
+          "javascript",
+          "typescript",
+          "solidity",
+          "html",
+          "yaml",
+          "bash",
+          "json"
+        ],
         "plugins": ["line-numbers"],
         "theme": "default",
         "css": true
