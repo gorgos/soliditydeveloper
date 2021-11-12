@@ -11,6 +11,7 @@ Scrivito.provideEditingConfig("CodeWidget", {
       values: [
         { value: "solidity", title: "Solidity" },
         { value: "javascript", title: "JavaScript" },
+        { value: "typescript", title: "TypeScript" },
         { value: "html", title: "HTML" },
         { value: "yml", title: "YAML" },
         { value: "bash", title: "Bash" },
