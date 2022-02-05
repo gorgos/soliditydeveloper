@@ -7,4 +7,4 @@
   publish = "buildPrerendered"
 
 [build.environment]
-  NPM_VERSION = "7.10"
+  NPM_VERSION = "8.4.1"
