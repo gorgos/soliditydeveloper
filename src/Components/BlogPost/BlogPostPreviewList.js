@@ -5,6 +5,7 @@ import { BlogPostDate } from "./BlogPostDate";
 import { formatDate } from "../../utils/formatDate";
 import { InPlaceEditingPlaceholder } from "../InPlaceEditingPlaceholder";
 import { isImageObj } from "../../utils/isImageObj";
+import { ClientRender } from "../../Components/ClientRender";
 
 export const BlogPostPreviewList = Scrivito.connect(
   ({ maxItems, author, tag, filterBlogPostId }) => {
@@ -41,14 +42,16 @@ export const BlogPostPreviewList = Scrivito.connect(
     });
 
     return (
-      <React.Fragment>
-        {Object.entries(months).map(([month, monthPosts]) => (
-          <React.Fragment key={`month: ${month}`}>
-            <MonthHeadline date={monthPosts[0].get("publishedAt")} />
-            <PostsTimeline posts={monthPosts} />
-          </React.Fragment>
-        ))}
-      </React.Fragment>
+      <ClientRender>
+        <React.Fragment>
+          {Object.entries(months).map(([month, monthPosts]) => (
+            <React.Fragment key={`month: ${month}`}>
+              <MonthHeadline date={monthPosts[0].get("publishedAt")} />
+              <PostsTimeline posts={monthPosts} />
+            </React.Fragment>
+          ))}
+        </React.Fragment>
+      </ClientRender>
     );
   }
 );
