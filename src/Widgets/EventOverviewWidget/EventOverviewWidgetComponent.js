@@ -2,30 +2,54 @@ import * as React from "react";
 import * as Scrivito from "scrivito";
 import { Event } from "../../Objs/Event/EventObjClass";
 import { formatDate } from "../../utils/formatDate";
-import { InPlaceEditingPlaceholder } from "../../Components/InPlaceEditingPlaceholder";
+// import { InPlaceEditingPlaceholder } from "../../Components/InPlaceEditingPlaceholder";
 import { TagList } from "../../Components/TagList";
 
 class EventOverviewWidgetComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { currentTag: "" };
-
+    this.state = { currentTag: "", showPastEvents: false };
     this.setTag = this.setTag.bind(this);
+    this.togglePastEvents = this.togglePastEvents.bind(this);
   }
 
   render() {
+    let noDateEvents = Scrivito.Obj.where("_objClass", "equals", "Event").and(
+      "endDate",
+      "equals",
+      null
+    );
     let eventsSearch = Scrivito.Obj.where("_objClass", "equals", "Event").order(
       "date",
       "asc"
     );
+
+    let tagsNoDateEvents = [];
+
+    if (this.state.showPastEvents) {
+      eventsSearch = eventsSearch.and("endDate", "isLessThan", new Date());
+      noDateEvents = noDateEvents.and("endDate", "isLessThan", new Date());
+    } else {
+      eventsSearch = eventsSearch.and("endDate", "isGreaterThan", new Date());
+
+      tagsNoDateEvents = [...noDateEvents.facet("tags")].map((facet) =>
+        facet.name()
+      );
+    }
+
+    const tagsEvents = [...eventsSearch.facet("tags")].map((facet) =>
+      facet.name()
+    );
+    const tags = [...new Set([...tagsEvents, ...tagsNoDateEvents])];
+
     const filterTags = this.props.widget.get("tags");
     if (filterTags.length) {
       eventsSearch = eventsSearch.and("tags", "equals", filterTags);
+      noDateEvents = noDateEvents.and("tags", "equals", filterTags);
     } else if (this.state.currentTag) {
       eventsSearch = eventsSearch.and("tags", "equals", this.state.currentTag);
+      noDateEvents = noDateEvents.and("tags", "equals", this.state.currentTag);
     }
-
-    const tags = [...Event.all().facet("tags")].map((facet) => facet.name());
 
     const maxItems = this.props.widget.get("maxItems");
     let events;
@@ -35,13 +59,15 @@ class EventOverviewWidgetComponent extends React.Component {
       events = [...eventsSearch];
     }
 
-    if (!events.length) {
+    events = [...events, ...noDateEvents];
+
+    /* if (!events.length) {
       return (
         <InPlaceEditingPlaceholder center>
           There are no event pages. Create one using the page menu.
         </InPlaceEditingPlaceholder>
       );
-    }
+    } */
 
     return (
       <div>
@@ -52,14 +78,36 @@ class EventOverviewWidgetComponent extends React.Component {
           tags={tags}
         />
         <section className="bg-white">
+          <input
+            checked={this.state.showPastEvents}
+            onChange={this.togglePastEvents}
+            type="checkbox"
+            id="showPastEvents"
+            name="showPastEvents"
+          />
+          <label className="past-event-label" htmlFor="showPastEvents">
+            Show Past Events
+          </label>
           <div className="row">
             {events.map((event) => (
               <EventItem key={event.id()} event={event} />
             ))}
           </div>
+
+          <b>
+            <label className="past-event-label" htmlFor="showPastEvents">
+              Dates are shown in local time {formatDate(new Date(), "Z")}.
+            </label>
+          </b>
         </section>
       </div>
     );
+  }
+
+  togglePastEvents() {
+    this.setState((prevState) => ({
+      showPastEvents: !prevState.showPastEvents,
+    }));
   }
 
   setTag(tag) {
@@ -87,8 +135,17 @@ const EventItem = Scrivito.connect(({ event }) => (
         }}
       >
         <span className="box-date">
-          {formatDate(event.get("date"), "mm/dd")}
+          {event.get("date") ? formatDate(event.get("date"), "mm/dd") : "TBA"}
         </span>
+        {formatDate(event.get("endDate"), "mm/dd") !==
+          formatDate(event.get("date"), "mm/dd") && (
+          <>
+            <span className="box-date-hyphen">-</span>
+            <span className="box-date-end">
+              {formatDate(event.get("endDate"), "mm/dd")}
+            </span>
+          </>
+        )}
         <span className="box-topic dark-background">
           <h3 className="h3">{event.get("title")}</h3>
           <EventShortLocation event={event} />

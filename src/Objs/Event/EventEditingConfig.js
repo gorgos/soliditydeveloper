@@ -8,18 +8,19 @@ import {
   metadataValidations,
 } from "../_metadataEditingConfig";
 
+import { DateRangePicker } from "../../Components/ScrivitoExtensions/DateRangePicker";
+
 Scrivito.provideEditingConfig("Event", {
   title: "Event",
   thumbnail: eventObjIcon,
   thumbnailForContent: (obj) => obj.get("image"),
   attributes: {
     ...metadataEditingConfigAttributes,
-    date: {
-      title: "Date",
-      description: "When is this event happening?",
-    },
     image: {
       title: "Image",
+    },
+    link: {
+      title: "Link",
     },
     locationName: {
       title: "Location name",
@@ -53,10 +54,30 @@ Scrivito.provideEditingConfig("Event", {
       title: "Tags",
       description: "Which tags can be associated with this event?",
     },
+    eventAttendanceMode: {
+      title: "Type of Event",
+      description: "Default: Offline",
+      values: [
+        { value: "OnlineEventAttendanceMode", title: "online" },
+        { value: "OfflineEventAttendanceMode", title: "offline" },
+        { value: "MixedEventAttendanceMode", title: "mixed" },
+      ],
+    },
+    eventStatus: {
+      title: "Status of Event",
+      description: "Default: Scheduled",
+      values: [
+        { value: "EventCancelled", title: "cancelled" },
+        { value: "EventMovedOnline", title: "moved online" },
+        { value: "EventPostponed", title: "postponed" },
+        { value: "EventRescheduled", title: "rescheduled" },
+        { value: "EventScheduled", title: "scheduled" },
+      ],
+    },
   },
   properties: [
     "title",
-    "date",
+    "link",
     "locationName",
     "locationStreetAddress",
     "locationLocality",
@@ -65,12 +86,23 @@ Scrivito.provideEditingConfig("Event", {
     "locationCountry",
     "image",
     "tags",
+    "eventAttendanceMode",
+    "eventStatus",
   ],
-  propertiesGroups: [...metadataPropertiesGroups],
+  propertiesGroups: [
+    {
+      title: "Dates Picker",
+      component: DateRangePicker,
+      key: "dates-picker",
+    },
+    ...metadataPropertiesGroups,
+  ],
   initialContent: {
     ...metadataInitialContent,
     title: "Lorem Ipsum",
     body: [new SectionWidget({})],
+    eventAttendanceMode: "OfflineEventAttendanceMode",
+    eventStatus: "EventScheduled",
   },
   validations: [
     ...metadataValidations,
@@ -93,6 +125,18 @@ Scrivito.provideEditingConfig("Event", {
         if (!date) {
           return {
             message: "Providing the event date is recommended.",
+            severity: "info",
+          };
+        }
+      },
+    ],
+    [
+      "endDate",
+
+      (endDate) => {
+        if (!endDate) {
+          return {
+            message: "Providing the event end date is recommended.",
             severity: "info",
           };
         }

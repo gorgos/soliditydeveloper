@@ -16,6 +16,7 @@
     "eslint:recommended",
     "plugin:react/recommended",
     "prettier",
+    "babel-plugin-prismjs",
     "react-app"
   ],
   "globals": {
