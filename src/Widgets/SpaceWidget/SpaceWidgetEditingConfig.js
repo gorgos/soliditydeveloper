@@ -7,11 +7,11 @@ Scrivito.provideEditingConfig("SpaceWidget", {
   attributes: {
     size: {
       title: "Choose size",
-      description: "Height of the space in em. Default: 5",
+      description: "Height of the space in em. Default: 1",
     },
   },
   properties: ["size"],
   initialContent: {
-    size: 5,
+    size: 1,
   },
 });
