@@ -1,9 +1,9 @@
 import * as React from "react";
 import * as Scrivito from "scrivito";
-import { Event } from "../../Objs/Event/EventObjClass";
 import { formatDate } from "../../utils/formatDate";
 // import { InPlaceEditingPlaceholder } from "../../Components/InPlaceEditingPlaceholder";
 import { TagList } from "../../Components/TagList";
+import { ClientRender } from "../../Components/ClientRender";
 
 class EventOverviewWidgetComponent extends React.Component {
   constructor(props) {
@@ -71,12 +71,14 @@ class EventOverviewWidgetComponent extends React.Component {
 
     return (
       <div>
-        <TagList
-          showTags={!filterTags.length && this.props.widget.get("showTags")}
-          currentTag={this.state.currentTag}
-          setTag={this.setTag}
-          tags={tags}
-        />
+        <ClientRender>
+          <TagList
+            showTags={!filterTags.length && this.props.widget.get("showTags")}
+            currentTag={this.state.currentTag}
+            setTag={this.setTag}
+            tags={tags}
+          />
+        </ClientRender>
         <section className="bg-white">
           <input
             checked={this.state.showPastEvents}
@@ -88,17 +90,19 @@ class EventOverviewWidgetComponent extends React.Component {
           <label className="past-event-label" htmlFor="showPastEvents">
             Show Past Events
           </label>
-          <div className="row">
-            {events.map((event) => (
-              <EventItem key={event.id()} event={event} />
-            ))}
-          </div>
+          <ClientRender>
+            <div className="row">
+              {events.map((event) => (
+                <EventItem key={event.id()} event={event} />
+              ))}
+            </div>
 
-          <b>
-            <label className="past-event-label" htmlFor="showPastEvents">
-              Dates are shown in local time {formatDate(new Date(), "Z")}.
-            </label>
-          </b>
+            <b>
+              <label className="past-event-label" htmlFor="showPastEvents">
+                Dates are shown in local time {formatDate(new Date(), "Z")}.
+              </label>
+            </b>
+          </ClientRender>
         </section>
       </div>
     );

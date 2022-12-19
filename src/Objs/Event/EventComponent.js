@@ -3,6 +3,7 @@ import * as Scrivito from "scrivito";
 import { formatDate } from "../../utils/formatDate";
 import { InPlaceEditingPlaceholder } from "../../Components/InPlaceEditingPlaceholder";
 import { SchemaDotOrg } from "../../Components/SchemaDotOrg";
+import { ClientRender } from "../../Components/ClientRender";
 
 Scrivito.provideComponent("Event", ({ page }) => (
   <div>
@@ -24,26 +25,28 @@ Scrivito.provideComponent("Event", ({ page }) => (
                 aria-hidden="true"
                 title="date"
               />{" "}
-              <Scrivito.ContentTag
-                content={page}
-                attribute="date"
-                tag="span"
-                className="event-info"
-              >
-                {formatDate(page.get("endDate"), "mm/dd/yyyy(Z)") !==
-                formatDate(page.get("date"), "mm/dd/yyyy(Z)") ? (
-                  <>
-                    <EventDate date={page.get("date")} />
+              <ClientRender>
+                <Scrivito.ContentTag
+                  content={page}
+                  attribute="date"
+                  tag="span"
+                  className="event-info"
+                >
+                  {formatDate(page.get("endDate"), "mm/dd/yyyy(Z)") !==
+                  formatDate(page.get("date"), "mm/dd/yyyy(Z)") ? (
+                    <>
+                      <EventDate date={page.get("date")} />
 
-                    <span className="box-date-hyphen">-</span>
-                    <span className="box-date-end">
-                      {formatDate(page.get("endDate"), "mm/dd/yyyy (Z)")}
-                    </span>
-                  </>
-                ) : (
-                  <EventDate date={page.get("date")} isSingleDay />
-                )}
-              </Scrivito.ContentTag>
+                      <span className="box-date-hyphen">-</span>
+                      <span className="box-date-end">
+                        {formatDate(page.get("endDate"), "mm/dd/yyyy (Z)")}
+                      </span>
+                    </>
+                  ) : (
+                    <EventDate date={page.get("date")} isSingleDay />
+                  )}
+                </Scrivito.ContentTag>
+              </ClientRender>
               {page.get("link") && (
                 <div className="h5 font-weight-bold">
                   <Scrivito.LinkTag
