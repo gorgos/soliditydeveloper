@@ -14,14 +14,14 @@ class EventOverviewWidgetComponent extends React.Component {
   }
 
   render() {
+    let eventsSearch = Scrivito.Obj.where("_objClass", "equals", "Event").order(
+      "date",
+      "asc"
+    );
     let noDateEvents = Scrivito.Obj.where("_objClass", "equals", "Event").and(
       "endDate",
       "equals",
       null
-    );
-    let eventsSearch = Scrivito.Obj.where("_objClass", "equals", "Event").order(
-      "date",
-      "asc"
     );
 
     let tagsNoDateEvents = [];
