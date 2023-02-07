@@ -152,11 +152,10 @@ function getUpdatedUTCDate(date, timeZones, city, overwriteTimezone) {
     dateOffset = dateOffset * -1;
   }
 
-  const clonedDate1 = new Date(date.getTime());
-  const clonedDate2 = new Date(date.getTime());
+  const clonedDate = new Date(date.getTime());
 
   const offsetDiff = timeZoneOffset - dateOffset;
-  const applyOffset = clonedDate1.setTime(date.getTime() + offsetDiff * 60_000);
+  const applyOffset = clonedDate.setTime(date.getTime() - offsetDiff * 60_000);
   const actualTime = new Date(applyOffset);
 
   return actualTime;
