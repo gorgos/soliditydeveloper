@@ -13,6 +13,7 @@
   padding: 0 8px;
   min-height: 30px;
   line-height: 30px;
+  word-break: break-all;
 }
 .content_property_input:focus {
   box-shadow: 0 0 0 2px #577fb6 inset !important;
@@ -36,7 +37,7 @@
   color: #444;
   display: block;
   font-size: 13px;
-  font-weight: 700;
+  font-weight: bold;
   padding: 2px 3px 2px;
 }
 .scrivito_detail_label span.headline {
@@ -45,7 +46,7 @@
 }
 .scrivito_notice_body {
   color: #666;
-  font-weight: 700;
+  font-weight: bold;
   font-size: 12px;
   padding: 0 0 10px;
 }

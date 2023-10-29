@@ -4,7 +4,7 @@ import { groupBy, truncate } from "lodash-es";
 import { BlogPostDate } from "./BlogPostDate";
 import { formatDate } from "../../utils/formatDate";
 import { InPlaceEditingPlaceholder } from "../InPlaceEditingPlaceholder";
-import { isImage } from "../../utils/isImage";
+import { isImageObj } from "../../utils/isImageObj";
 import { ClientRender } from "../../Components/ClientRender";
 
 export const BlogPostPreviewList = Scrivito.connect(
@@ -105,7 +105,7 @@ const BlogPostPreview = Scrivito.connect(({ post }) => (
 
 const BlogPostTitleImage = Scrivito.connect(({ post }) => {
   const titleImage = post.get("titleImage");
-  if (!isImage(titleImage)) return null;
+  if (!isImageObj(titleImage)) return null;
 
   return (
     <Scrivito.LinkTag to={post}>

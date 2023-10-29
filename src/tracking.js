@@ -1,4 +1,4 @@
-import "autotrack/lib/plugins/url-change-tracker";
+// This file is for executing JavaScript code after the user has given cookie consent.
 
 const googleScript = document.createElement("script");
 googleScript.setAttribute("async", true);
