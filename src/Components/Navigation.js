@@ -69,7 +69,7 @@ export const Navigation = Scrivito.connect(
     }
 
     handleScroll(event) {
-      // see https://stackoverflow.com/q/28633221/881759 for discussion about pageYOffset
+      // See 3431dcd89c35f81c4788b27172ece8d58f53a5e5 for a link to an explanation.
       const scrollTop = event.currentTarget.pageYOffset;
       const scrolledToBe = scrollTop !== 0;
 
