@@ -5,3 +5,4 @@ buildPrerendered
 node_modules
 tmp
 .env
+output
