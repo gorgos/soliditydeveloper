@@ -1,12 +1,39 @@
 import * as React from "react";
 import * as Scrivito from "scrivito";
-import useResizeObserver from "use-resize-observer";
 
 import { googleMapsApiKey } from "../../utils/googleMapsApiKey";
 import { googleMapsImageUrl } from "../../utils/googleMapsImageUrl";
 import "./GoogleMapsWidget.scss";
 
 const maxWidth = 640;
+
+function useElementSize() {
+  const [element, setElement] = React.useState(null);
+  const [size, setSize] = React.useState({ width: null, height: null });
+
+  React.useEffect(() => {
+    if (!element) return undefined;
+
+    const updateSize = () => {
+      const { width, height } = element.getBoundingClientRect();
+      setSize({ width: Math.round(width), height: Math.round(height) });
+    };
+
+    updateSize();
+
+    if (typeof ResizeObserver === "undefined") {
+      window.addEventListener("resize", updateSize);
+      return () => window.removeEventListener("resize", updateSize);
+    }
+
+    const observer = new ResizeObserver(updateSize);
+    observer.observe(element);
+
+    return () => observer.disconnect();
+  }, [element]);
+
+  return { ref: setElement, ...size };
+}
 
 function GoogleMapsWidgetComponent({ widget }) {
   const address = widget.get("address") || "Brandenburg Gate, Berlin, Germany";
@@ -44,7 +71,7 @@ function StaticGoogleMap({ address, apiKey, zoom, children }) {
     ref,
     width: elementWidth = null,
     height: elementHeight = null,
-  } = useResizeObserver();
+  } = useElementSize();
   const { width, height } = scaleMapSize(elementWidth, elementHeight);
 
   return (

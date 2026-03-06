@@ -1,4 +1,5 @@
-const builder = require("content-security-policy-builder");
+const cspBuilder = require("content-security-policy-builder");
+const builder = cspBuilder.default || cspBuilder;
 const dotenv = require("dotenv");
 const path = require("path");
 const process = require("process");
@@ -90,11 +91,30 @@ function webpackConfig(env = {}) {
           ],
         },
         {
-          test: /\.s?css$/,
+          test: /\.css$/,
+          use: [{ loader: MiniCssExtractPlugin.loader }, "css-loader"],
+        },
+        {
+          test: /\.scss$/,
           use: [
             { loader: MiniCssExtractPlugin.loader },
             "css-loader",
-            "sass-loader",
+            {
+              loader: "sass-loader",
+              options: {
+                sassOptions: {
+                  silenceDeprecations: [
+                    "legacy-js-api",
+                    "import",
+                    "global-builtin",
+                    "color-functions",
+                    "function-units",
+                    "abs-percent",
+                    "if-function",
+                  ],
+                },
+              },
+            },
           ],
         },
         {
@@ -158,6 +178,13 @@ function webpackConfig(env = {}) {
       new ReactRefreshWebpackPlugin({ overlay: false }),
       new webpack.SourceMapDevToolPlugin({}),
       new WebpackManifestPlugin({ fileName: "asset-manifest.json" }),
+    ],
+    ignoreWarnings: [
+      {
+        module: /react-datepicker\/dist\/index\.es\.js$/,
+        message:
+          /Critical dependency: the request of a dependency is an expression/,
+      },
     ],
     resolve: {
       extensions: [".js"],

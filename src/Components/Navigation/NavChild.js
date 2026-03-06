@@ -43,12 +43,27 @@ class BaseNavChild extends React.Component {
       topLevelProps.onMouseLeave = this.closeDropdown;
     }
 
-    if (this.props.child.children().length === 0) {
+    if (!supportsDropdown(this.props.child)) {
       return <NavSingleChild {...topLevelProps} />;
     }
 
     return <Dropdown toggleDropdown={this.toggleDropdown} {...topLevelProps} />;
   }
+}
+
+function supportsDropdown(child) {
+  const permalink = (child.permalink() || "").toLowerCase().trim();
+  const title = (child.get("title") || "").toLowerCase().trim();
+
+  // Keep the "Events" root item as a single nav entry even if it has many child pages.
+  if (permalink === "events" || title === "events") return false;
+
+  // Never build a dropdown solely for Event detail pages.
+  const nonEventChildren = child
+    .children()
+    .filter((innerChild) => innerChild.objClass() !== "Event");
+
+  return nonEventChildren.length > 0;
 }
 
 export const NavChild = Scrivito.connect(BaseNavChild);

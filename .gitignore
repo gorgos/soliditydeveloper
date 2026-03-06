@@ -5,3 +5,5 @@ buildPrerendered
 node_modules
 tmp
 .env
+output
+.playwright-cli
